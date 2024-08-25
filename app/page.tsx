@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -91,7 +91,7 @@ const Tasks = () => {
   const onCloseUpsertModel = (task: Task, index: number) => {
     if (task) {
       const updatedTasks = [...tasks];
-      debugger
+      debugger;
       if (index > -1) {
         updatedTasks[index] = task;
       } else {
@@ -115,139 +115,112 @@ const Tasks = () => {
   return (
     <>
       <Box
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        className="w-full h-full flex items-center justify-start flex-col p-[10px]"
+        sx={{ backgroundColor: theme.palette.primary.light }}
       >
-        <Stack sx={{ width: "85%", maxWidth: "1280px", marginTop: "6pc" }}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
+        <Box className="flex items-center justify-end w-full">
+          <Button
+            variant="contained"
+            className="flex items-center justify-end border-radius-[8px] mt-[10px]"
+            onClick={() =>
+              onUpsertTask(
+                {
+                  title: "",
+                  description: "",
+                  id: "",
+                },
+                -1
+              )
+            }
           >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "start",
-                marginBottom: 10,
-              }}
-            ></Box>
-            <Button
-              variant="contained"
-              sx={{ borderRadius: "8px", float: "right" }}
-              onClick={() =>
-                onUpsertTask(
-                  {
-                    title: "",
-                    description: "",
-                    id: "",
-                  },
-                  -1
-                )
-              }
-            >
-              Add Task
-            </Button>
-          </Box>
-          <Grid container spacing={2}>
-            {tasks.map(({ title, description, id }, index) => {
-              return (
-                <Grid
-                  sx={{
-                    width: "100%",
-                  }}
-                  key={id}
-                  xs={12}
-                  md={4}
-                  item
-                  lg={2}
-                >
-                  <Card>
-                    <CardHeader title={title} />
-                    <CardContent>
-                      <Typography variant="body2" color="text.secondary">
-                        {description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions disableSpacing>
-                      <IconButton
-                        aria-label="edit"
-                        onClick={() =>
-                          onUpsertTask(
-                            {
-                              title,
-                              description,
-                              id,
-                            },
-                            index
-                          )
-                        }
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() =>
-                          setDeleteInfo({
-                            ...deleteTaskInfo,
+            Add Task
+          </Button>
+        </Box>
+        <Grid container spacing={2}>
+          {tasks.map(({ title, description, id }, index) => {
+            return (
+              <Grid
+                className="w-full"
+                key={id}
+                xs={12}
+                md={4}
+                item
+                lg={2}
+              >
+                <Card>
+                  <CardHeader title={title} />
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton
+                      aria-label="edit"
+                      onClick={() =>
+                        onUpsertTask(
+                          {
+                            title,
+                            description,
                             id,
-                          })
-                        }
-                      >
-                        <DeleteForeverIcon />
-                      </IconButton>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Stack>
+                          },
+                          index
+                        )
+                      }
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() =>
+                        setDeleteInfo({
+                          ...deleteTaskInfo,
+                          id,
+                        })
+                      }
+                    >
+                      <DeleteForeverIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
       </Box>
       <Dialog
         open={!!deleteTaskInfo.id || false}
-        sx={{ padding: "20px", borderRadius: "16px" }}
+        className="p-[20px] border-radius-[20px]"
       >
-        <DialogTitle sx={{ textAlign: "center", width: "100%" }}>
+        <DialogTitle className="text-center w-full">
           Delete Task
         </DialogTitle>
         <DialogContent>
           <Typography
-            sx={{ fontSize: "14px", textTransform: "capitalize", mb: 2 }}
           >
             Are you sure you want to delete this task?
           </Typography>
           <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-around",
-            }}
+           className="flex items-center justify-around w-full mt-[10px]"
           >
             <Button
               variant="contained"
-              sx={{
-                fontSize: "15px",
-                fontWeight: "600",
-                textTransform: "capitalize",
-              }}
+              className="flex items-center justify-end capitalize"
               onClick={() => onDeleteTask()}
             >
               <CircularProgress
                 size={25}
+                className="items-center justify-end"
                 sx={{
-                  color: "#ffffff",
                   display: deleteTaskInfo.isLoading ? "flex" : "none",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  color: theme.palette.primary.light
                 }}
               />
               <Typography
                 sx={{
-                  marginLeft: 2,
                   display: !deleteTaskInfo.isLoading ? "flex" : "none",
                 }}
+                className="ml-[10px]"
               >
                 Delete
               </Typography>
@@ -261,14 +234,7 @@ const Tasks = () => {
                   isLoading: false,
                 })
               }
-              sx={{
-                fontSize: "15px",
-                fontWeight: "500",
-                textTransform: "capitalize",
-                color: theme.palette.primary.main,
-                mr: 3,
-                cursor: "pointer",
-              }}
+               className="capitalize"
             >
               Close
             </Button>
@@ -277,10 +243,12 @@ const Tasks = () => {
       </Dialog>
       <Dialog
         open={upsertTaskInfo.show}
-        sx={{ padding: "20px", borderRadius: "16px" }}
+         className="p-[20px] border-radius-[20px]"
       >
         <UpsertTask
-          onClose={(task: Task) => onCloseUpsertModel(task, upsertTaskInfo.index)}
+          onClose={(task: Task) =>
+            onCloseUpsertModel(task, upsertTaskInfo.index)
+          }
           task={upsertTaskInfo.task}
         />
       </Dialog>

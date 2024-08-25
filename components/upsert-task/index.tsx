@@ -54,44 +54,29 @@ const UpsertTask = ({ onClose, task }: {
   return (
     <Grid
       container
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-      }}
+      className="flex items-center justify-around w-full"
     >
       <Grid item lg={12}>
         <Box
           component="form"
           onSubmit={handleTaskSubmit}
-          sx={{
-            display: "flex",
-            alignItems: "start",
-            justifyContent: "center",
-          }}
+          className="flex items-center justify-around"
         >
           <AddCard>
             <Box>
               <Box
-                //  noValidate
-                sx={{ mt: 1, textAlign: "center", width: "100%" }}
+                className="mt-[5px] text-center  w-full"
               >
                 <Typography
                   component="span"
-                  sx={{ fontWeight: "bold", fontSize: "20px", mb: 5 }}
+                     className="mt-[5px] font-bold w-full"
                 >
                   {task.id ? "Update" : "Create"} Task
                 </Typography>
-                <Box sx={{ textAlign: "left" }}>
+                <Box className="text-left">
                   <Typography
                     component="span"
-                    sx={{
-                      fontWeight: "400",
-                      fontSize: "16px",
-                      mb: 1,
-                      mt: 1,
-                    }}
+                    className="mt-[5px] mb-[5px] w-full"
                   >
                     Title
                   </Typography>
@@ -103,15 +88,15 @@ const UpsertTask = ({ onClose, task }: {
                     type={"text"}
                     id="title"
                     size="small"
-                    sx={{ mb: 1, mt: 1 }}
+                    className="mt-[5px] mb-[5px] w-full"
                     value={formValues.title}
                     onChange={(e) => onChangeFormValue("title", e.target.value)}
                   ></TextField>
                 </Box>
-                <Box sx={{ textAlign: "left", marginTop: "10px" }}>
+                <Box className="text-left">
                   <Typography
                     component="span"
-                    sx={{ fontWeight: "400", fontSize: "16px" }}
+                    className="mt-[5px] mb-[5px] w-full"
                   >
                     Description
                   </Typography>
@@ -124,7 +109,7 @@ const UpsertTask = ({ onClose, task }: {
                     type="textarea"
                     autoFocus
                     rows={4}
-                    sx={{ mb: 1, mt: 1 }}
+                     className="mt-[5px] mb-[5px] w-full"
                     value={formValues.description}
                     multiline
                     maxRows={4}
@@ -143,16 +128,15 @@ const UpsertTask = ({ onClose, task }: {
                 flexWrap: "wrap" /* No wrapping by default */,
                 gap: 1,
               }}
+              className="flex items-center justify-around w-full flex-wrap mt-[10px]"
             >
               <Button
                 type="submit"
                 variant="contained"
                 sx={{
-                  borderRadius: 18,
                   flex: "1 1 200px",
-                  width: "50%",
-                  textTransform: "capitalize",
                 }}
+                className="rounded-lg w-half capitalize"
               >
                 {task.id ? "Update" : "Create"} Task
               </Button>
@@ -160,11 +144,9 @@ const UpsertTask = ({ onClose, task }: {
                 type="button"
                 variant="outlined"
                 sx={{
-                  borderRadius: 18,
                   flex: "1 1 200px",
-                  width: "50%",
-                  textTransform: "capitalize",
                 }}
+                className="rounded-lg w-half capitalize"
                 onClick={() => onClose()}
               >
                 Cancel
